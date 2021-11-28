@@ -13,7 +13,7 @@ class Counter extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <span className={this.getBadgeClasses()}>{this.state.count}</span>  {/*We can also call function {this.formatCount()} instead of rendering {this.state.count}, destructure {count} out of this.state to further reduce repetitive code. */}
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>  {/*Instead of rendering {this.state.count}, we call function {this.formatCount()} , destructure {count} out of this.state to further reduce repetitive code; and render "Zero" or count conditionally*/}
         <button
           onClick={() => this.handleIncrement()}
           className="btn btn-primary btn-sm"
@@ -33,10 +33,10 @@ class Counter extends React.Component {
     return classes;
   }
 
-  // formatCount() {
-  //   const { count } = this.state;
-  //   return count === 0 ? "Zero" : count;
-  // }
+  formatCount() {
+    const { count } = this.state;
+    return count === 0 ? "Zero" : count;
+  }
 }
 
 export default Counter;
