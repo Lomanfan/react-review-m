@@ -11,6 +11,8 @@ class Counter extends React.Component {
   };
 
   render() {
+    console.log('props', this.props);
+
     return (
       <React.Fragment>
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>  {/*Instead of rendering {this.state.count}, we call function {this.formatCount()} , destructure {count} out of this.state to further reduce repetitive code; and render "Zero" or count conditionally*/}
