@@ -13,8 +13,11 @@ class Counters extends React.Component {
 
   handleIncrement = (counter) => {
     console.log("counter", counter);
+    const counters = [...this.state.counters];
     counter[0] = {...counter};
-    this.setState({ value: counter.value + 1 });
+    // counter[0].value++;
+    console.log(this.state.counters[0]);
+
   };
 
   handleDelete = (counterId) => {
