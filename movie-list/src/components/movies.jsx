@@ -12,8 +12,12 @@ class Movies extends React.Component {
   }
 
   render() {
-    console.log(this.state.movies);
+    // console.log(this.state.movies);
+    if (this.state.movies.length === 0) return <p>There are no movies in the database.</p>
+
     return (
+      <React.Fragment>
+      <p>Showing {this.state.movies.length} movies.</p>
       <table className="table">
         <thead>
           <tr>
@@ -38,6 +42,7 @@ class Movies extends React.Component {
           ))}
         </tbody>
       </table>
+      </React.Fragment>
     );
   }
 }
