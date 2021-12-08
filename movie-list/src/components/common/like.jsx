@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 
 class Like extends React.Component {
   render() { 
-    return (<i className="fa fa-heart-o" aria-hidden="true"></i>);
+    let classes="fa fa-heart";
+    if (!this.props.liked) classes += "-o";
+    return (<i className={classes} aria-hidden="true"></i>);
   }
 }
  
