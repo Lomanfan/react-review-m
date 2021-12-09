@@ -6,7 +6,7 @@ import Pagination from "./common/pagination";
 class Movies extends React.Component {
   state = {
     movies: getMovies(), //Temporarily to initialize, to be updated.
-    pageSize: 10
+    pageSize: 4
   };
 
   handleDelete = (movie) => {
