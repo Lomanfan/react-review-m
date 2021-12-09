@@ -1,15 +1,21 @@
 import React from "react";
+import _ from "lodash";
 
 const Pagination = (props) => {
-  const { itemsCount, pageSize } = props;
-  const pagesCount = itemsCount / pageSize;
+  const { itemsCount, pageSize, onPageChange } = props;
+  const pagesCount = Math.ceil(itemsCount / pageSize);
+  // console.log(pagesCount);   //0.9 page, add Math.ceil()
+  if (pagesCount === 1) return null; //no pagination
+  const pages = _.range(1, pagesCount + 1);
 
   return (
     <nav>
       <ul className="pagination">
-        <li className="page-item">
-          <a className="page-link">1</a>
-        </li>
+        {pages.map((page) => (
+          <li key={page} className="page-item">
+            <a onClick={onPageChange} className="page-link">{page}</a>
+          </li>
+        ))}
       </ul>
     </nav>
   );
