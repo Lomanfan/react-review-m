@@ -51,7 +51,7 @@ class Movies extends React.Component {
     if (allMovies.length === 0)
       return <p>There are no movies in the database.</p>;
 
-    const filtered = selectedGenre ? allMovies.filter(m => m.genre._id === selectedGenre._id) : allMovies;
+    const filtered = selectedGenre && selectedGenre._id ? allMovies.filter(m => m.genre._id === selectedGenre._id) : allMovies;
 
     const movies = paginate(
       filtered,
