@@ -39,7 +39,7 @@ class Movies extends React.Component {
   };
 
   handleGenreSelect = (genre) => {
-    this.setState({ selectedGenre: genre });
+    this.setState({ selectedGenre: genre, currentPage: 1 });
   };
 
 
