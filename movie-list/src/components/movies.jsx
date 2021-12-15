@@ -15,7 +15,7 @@ class Movies extends React.Component {
   };
 
   componentDidMount() {
-    const genres = [{ name: "All Genres" }, ...getGenres()];
+    const genres = [{_id: '', name: "All Genres" }, ...getGenres()];
     this.setState({ movies: getMovies(), genres: genres });
   }
 
@@ -25,7 +25,7 @@ class Movies extends React.Component {
   };
 
   handleLike = (movie) => {
-    console.log("Like clicked.", movie);
+    // console.log("Like clicked.", movie);
     const movies = [...this.state.movies];
     const index = movies.indexOf(movie);
     movies[index] = { ...movies[index] };
@@ -40,6 +40,11 @@ class Movies extends React.Component {
 
   handleGenreSelect = (genre) => {
     this.setState({ selectedGenre: genre, currentPage: 1 });
+  };
+
+  handleSort = (path) => {
+    console.log("Sort:", path);
+
   };
 
   render() {
@@ -73,7 +78,7 @@ class Movies extends React.Component {
         </div>
         <div className="col">
           <p>Showing {filtered.length} movies.</p>
-          <MoviesTable movies={movies} onLike={this.handleLike} onDelete={this.handleDelete}/>
+          <MoviesTable movies={movies} onLike={this.handleLike} onDelete={this.handleDelete} onSort={this.handleSort}/>
           <Pagination
             itemsCount={filtered.length}
             pageSize={pageSize}
