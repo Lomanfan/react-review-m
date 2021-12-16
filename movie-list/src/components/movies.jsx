@@ -5,6 +5,7 @@ import ListGroup from "./common/listGroup";
 import MoviesTable from "./moviesTable";
 import Pagination from "./common/pagination";
 import { paginate } from "../utilities/paginate";
+import _ from 'lodash';
 
 class Movies extends React.Component {
   state = {
@@ -12,10 +13,11 @@ class Movies extends React.Component {
     currentPage: 1,
     genres: [],
     pageSize: 4,
+    sortColumn: {path: 'title', order: 'ascending'}
   };
 
   componentDidMount() {
-    const genres = [{_id: '', name: "All Genres" }, ...getGenres()];
+    const genres = [{ _id: "", name: "All Genres" }, ...getGenres()];
     this.setState({ movies: getMovies(), genres: genres });
   }
 
@@ -43,8 +45,8 @@ class Movies extends React.Component {
   };
 
   handleSort = (path) => {
-    console.log("Sort:", path);
-
+    // console.log("Sort:", path);
+    this.setState({ sortColumn: { path: path, order: "ascending" }});
   };
 
   render() {
@@ -53,6 +55,7 @@ class Movies extends React.Component {
     const {
       pageSize,
       currentPage,
+      sortColumn,
       selectedGenre,
       movies: allMovies,
     } = this.state;
@@ -65,7 +68,10 @@ class Movies extends React.Component {
         ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
         : allMovies;
 
-    const movies = paginate(filtered, currentPage, pageSize);
+   const sorted = _.orderBy(filtered, [sortColumn.path],[sortColumn.order]) //3 arguments: input, [parameter name],[sort order] 
+
+
+    const movies = paginate(sorted, currentPage, pageSize);
 
     return (
       <div className="row">
@@ -78,7 +84,12 @@ class Movies extends React.Component {
         </div>
         <div className="col">
           <p>Showing {filtered.length} movies.</p>
-          <MoviesTable movies={movies} onLike={this.handleLike} onDelete={this.handleDelete} onSort={this.handleSort}/>
+          <MoviesTable
+            movies={movies}
+            onLike={this.handleLike}
+            onDelete={this.handleDelete}
+            onSort={this.handleSort}
+          />
           <Pagination
             itemsCount={filtered.length}
             pageSize={pageSize}
