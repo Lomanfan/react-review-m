@@ -46,7 +46,6 @@ class Movies extends Component {
 
   handleSort = (sortColumn) => {
     // console.log("Sort:", path);
-   
     this.setState({ sortColumn });
   };
 
