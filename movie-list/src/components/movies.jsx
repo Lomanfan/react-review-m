@@ -7,7 +7,7 @@ import Pagination from "./common/pagination";
 import { paginate } from "../utilities/paginate";
 import _ from 'lodash';
 
-class Movies extends React.Component {
+class Movies extends Component {
   state = {
     movies: [], //set movies to empty until data is received
     currentPage: 1,
@@ -44,15 +44,9 @@ class Movies extends React.Component {
     this.setState({ selectedGenre: genre, currentPage: 1 });
   };
 
-  handleSort = (path) => {
+  handleSort = (sortColumn) => {
     // console.log("Sort:", path);
-    const sortColumn = {...this.state.sortColumn};
-    if (sortColumn.path === path)
-    sortColumn.order = (sortColumn.order === 'asc') ? 'desc' : 'asc';
-    else {
-      sortColumn.path = path;
-      sortColumn.order = 'asc';
-    }
+   
     this.setState({ sortColumn });
   };
 
@@ -93,6 +87,7 @@ class Movies extends React.Component {
           <p>Showing {filtered.length} movies.</p>
           <MoviesTable
             movies={movies}
+            sortColumn={sortColumn}
             onLike={this.handleLike}
             onDelete={this.handleDelete}
             onSort={this.handleSort}
