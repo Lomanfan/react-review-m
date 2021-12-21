@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch } from "react-router-dom";
 import NavBar from "./components/navbar";
 import Products from "./components/products";
 import Posts from "./components/posts";
@@ -16,10 +16,13 @@ class App extends Component {
         <NavBar />
         <div className="content">
           <Switch>
-          <Route path="/products" component={Products} />
-          <Route path="/posts" component={Posts} />
-          <Route path="/admin" component={Dashboard} />
-          <Route path="/" component={Home} />
+            <Route
+              path="/products"
+              render={(props) => <Products {...props} sortBy="newest" />}
+            />
+            <Route path="/posts" component={Posts} />
+            <Route path="/admin" component={Dashboard} />
+            <Route path="/" component={Home} />
           </Switch>
         </div>
       </div>
