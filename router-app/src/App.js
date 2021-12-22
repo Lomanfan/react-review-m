@@ -23,7 +23,7 @@ class App extends Component {
             />
             <Route path="/posts/:year?/:month?" component={Posts} />
             <Route path="/admin" component={Dashboard} />
-            <Route path="/" component={Home} />
+            <Route path="/" exact component={Home} />
           </Switch>
         </div>
       </div>
