@@ -1,18 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom"
+import Sidebar from "./sidebar";
 
 const Dashboard = ({ match }) => {
   return (
     <div>
       <h1>Admin Dashboard</h1>
-      <ul>
-        <li>
-          <Link to="/admin/posts">Posts</Link>
-        </li>
-        <li>
-          <Link to="/admin/users">Users</Link>
-        </li>
-      </ul>
+      <Sidebar />
     </div>
   );
 };
