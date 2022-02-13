@@ -6,6 +6,7 @@ import MoviesTable from "./moviesTable";
 import Pagination from "./common/pagination";
 import { paginate } from "../utilities/paginate";
 import _ from "lodash";
+import { Link } from "react-router-dom";
 
 class Movies extends Component {
   state = {
@@ -67,27 +68,28 @@ class Movies extends Component {
 
     const movies = paginate(sorted, currentPage, pageSize);
 
-    return { totalCount: filtered.length, data: movies};
+    return { totalCount: filtered.length, data: movies };
   };
 
   render() {
     // console.log(this.state.movies);
 
-    const {
-      pageSize,
-      currentPage,
-      sortColumn,
-      movies: allMovies,
-    } = this.state;
+    const { pageSize, currentPage, sortColumn, movies: allMovies } = this.state;
 
     if (allMovies.length === 0)
       return <p>There are no movies in the database.</p>;
 
-    const { totalCount, data: movies} = this.getPageData();
+    const { totalCount, data: movies } = this.getPageData();
 
     return (
       <div className="row">
         <div className="col-3">
+          <Link
+            to="/movies/new"
+            className="btn btn-primary style={{marginBottom: 20}}"
+          >
+            New Movie
+          </Link>
           <ListGroup
             items={this.state.genres}
             selectedItem={this.state.selectedGenre}
