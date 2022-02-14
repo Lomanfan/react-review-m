@@ -4,22 +4,6 @@ import Form from "./common/form";
 import { getMovie, saveMovie } from "../services/movieService";
 import { getGenres } from "../services/genreService";
 
-// const MovieForm = ({ match, history }) => {
-//   return (
-//     <div>
-//       <h1>Movie Form {match.params.id} </h1>
-//       <button
-//         className="btn btn-primary"
-//         onClick={() => history.push("/movies")}
-//       >
-//         Save
-//       </button>
-//     </div>
-//   );
-// };
-
-// export default MovieForm;
-
 class MovieForm extends Form {
   state = {
     data: {
@@ -40,11 +24,11 @@ class MovieForm extends Form {
       .required()
       .min(0)
       .max(100)
-      .label("Number In Stock"),
+      .label("Number in Stock"),
     dailyRentalRate: Joi.number()
       .required()
       .min(0)
-      .max(0)
+      .max(10)
       .label("Daily Rental Rate"),
   };
 
@@ -65,7 +49,7 @@ class MovieForm extends Form {
     return {
       _id: movie._id,
       title: movie.title,
-      genreId: movie.genre.id,
+      genreId: movie.genre._id,
       numberInStock: movie.numberInStock,
       dailyRentalRate: movie.dailyRentalRate,
     };
@@ -82,7 +66,7 @@ class MovieForm extends Form {
       <div>
         <h1>Movie Form</h1>
         <form onSubmit={this.handleSubmit}>
-          {this.renderInput("title, Title")}
+          {this.renderInput("title", "Title")}
           {this.renderSelect("genreId", "Genre", this.state.genres)}
           {this.renderInput("numberInStock", "Number in Stock", "number")}
           {this.renderInput("dailyRentalRate", "Rate")}
